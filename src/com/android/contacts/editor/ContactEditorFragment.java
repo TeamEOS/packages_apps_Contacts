@@ -880,6 +880,14 @@ public class ContactEditorFragment extends Fragment implements
 
             editor.setEnabled(mEnabled);
 
+            String accountName = rawContactDelta.getAccountName();
+            CharSequence accountType = type.getDisplayLabel(mContext);
+            if (TextUtils.isEmpty(accountName) && TextUtils.isEmpty(accountType)) {
+                if (numRawContacts != 1) {
+                    continue;
+                }
+            }
+
             if (mExpandedEditors.containsKey(rawContactId)) {
                 editor.setCollapsed(mExpandedEditors.get(rawContactId));
             } else {
