@@ -200,11 +200,14 @@ public class RawContactEditorView extends BaseRawContactEditorView {
         // Fill in the account info
         if (isProfile) {
             String accountName = state.getAccountName();
+            CharSequence accountType = type.getDisplayLabel(mContext);
             if (TextUtils.isEmpty(accountName)) {
                 mAccountHeaderNameTextView.setVisibility(View.GONE);
                 mAccountHeaderTypeTextView.setText(R.string.local_profile_title);
-            } else {
-                CharSequence accountType = type.getDisplayLabel(mContext);
+            } else if (TextUtils.isEmpty(accountType)) {
+                mAccountHeaderNameTextView.setVisibility(View.GONE);
+                mAccountHeaderTypeTextView.setText(R.string.local_profile_title);
+            }  else {
                 mAccountHeaderTypeTextView.setText(mContext.getString(R.string.external_profile_title,
                         accountType));
                 mAccountHeaderNameTextView.setText(accountName);
